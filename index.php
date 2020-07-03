@@ -17,9 +17,8 @@ $i=1;
 
 $removeDate = date('Y-m-d',strtotime('-0 days'));
 //删除昨天保存的已发送视频记录
-$sendFileTxt = glob('./send/*');
+$sendFileTxt = glob($path.'/send/*');
 foreach($sendFileTxt as $txt){
-	echo $removeDate;
 	if(date('Y-m-d',filectime($txt)) == $removeDate){
 		unlink($path.$txt);
 	}
