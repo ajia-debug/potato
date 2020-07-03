@@ -13,6 +13,8 @@ $search = array(
 $startTime = date('Y-m-d',strtotime('-2 days'));
 $endTime = date('Y-m-d',strtotime('-1 days'));
 
+$path = str_replace('\\','/',dirname(__FILE__)).'/';
+
 foreach($search as $word){
 	$keywords = urlencode($word.' until:'.$endTime.' since:'.$startTime);
 
@@ -82,10 +84,11 @@ foreach($search as $word){
 		$fileName = explode('/',$fileName);
 		$file = array_pop($fileName);
 		//检查视频是否存在
-		if(!file_exists('./download/'.$file)){
-			$flag = file_put_contents('./download/'.$file,file_get_contents($v));
+		if(!file_exists($path.'/download/'.$file)){
+			$flag = file_put_contents($path.'/download/'.$file,file_get_contents($v));
 			if($flag !== false){
 				//记录下载成功到视频
+				echo 'Download:'.$v.PHP_EOL;
 			}
 		}
 	}
