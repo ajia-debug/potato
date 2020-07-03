@@ -15,18 +15,18 @@ $alreadySendArr = explode("\r\n",$alreadySend);
 $limitSend = 5;//限制每次发送的视频数量
 $i=1;
 
-$removeDate = date('Y-m-d',strtotime('-0 days'));
+$removeDate = date('Y-m-d',strtotime('-1 days'));
 //删除昨天保存的已发送视频记录
 $sendFileTxt = glob($path.'/send/*');
 foreach($sendFileTxt as $txt){
 	if(date('Y-m-d',filectime($txt)) == $removeDate){
-		unlink($path.$txt);
+		unlink($txt);
 	}
 }
 foreach($videoes as $vi){
 	//删除两天前下载的视频
 	if(date('Y-m-d',filectime($vi)) == $removeDate){
-		unlink($path.$vi);
+		unlink($vi);
 		continue;
 	}
 	if($i>$limitSend){
