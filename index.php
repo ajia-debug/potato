@@ -20,13 +20,13 @@ $removeDate = date('Y-m-d',strtotime('-0 days'));
 $sendFileTxt = glob('./send/*');
 foreach($sendFileTxt as $txt){
 	echo $removeDate;
-	if(date('Y-m-d',filectime($path.$txt)) == $removeDate){
+	if(date('Y-m-d',filectime($txt)) == $removeDate){
 		unlink($path.$txt);
 	}
 }
 foreach($videoes as $vi){
 	//删除两天前下载的视频
-	if(date('Y-m-d',filectime($path.$vi)) == $removeDate){
+	if(date('Y-m-d',filectime($vi)) == $removeDate){
 		unlink($path.$vi);
 		continue;
 	}
@@ -42,7 +42,7 @@ foreach($videoes as $vi){
 	$reqData = new \Jsyqw\PotatoBot\Requests\ReqSendVideo();
 	$reqData->chat_id = $group; //群组
 	$reqData->chat_type = 3;//\Jsyqw\PotatoBot\Types\ChatType::PeerChat;
-	$reqData->video = fopen($path.$vi, 'r');
+	$reqData->video = fopen($vi, 'r');
 	//$reqData->thumb = fopen('./img.png','r');
 	//$reqData->caption = '机器人自动发的视频';
 	
