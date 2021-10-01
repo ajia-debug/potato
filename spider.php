@@ -83,9 +83,13 @@ foreach($search as $word){
 		$fileName = parse_url($v,PHP_URL_PATH);
 		$fileName = explode('/',$fileName);
 		$file = array_pop($fileName);
+		$filePath = $path.'/download/'.md5($word);
+		if(!is_dir($filePath)){
+			mkdir($filePath,0777,true);
+		}
 		//检查视频是否存在
-		if(!file_exists($path.'/download/'.$file)){
-			$flag = file_put_contents($path.'/download/'.$file,file_get_contents($v));
+		if(!file_exists($filePath.'/'.$file)){
+			$flag = file_put_contents($filePath.$file,file_get_contents($v));
 			if($flag !== false){
 				//记录下载成功到视频
 				echo 'Download:'.$v.PHP_EOL;
